@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DigiDhan - Digital Lending Assistant</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+body {
+font-family: 'Roboto', sans-serif;
+background-color: #e5ddd5;
+margin: 0;
+padding: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+}
+
+#chat-container {
+width: 100%;
+max-width: 1200px;
+height: 90vh;
+background-color: #fff;
+border-radius: 8px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+display: flex;
+overflow: hidden;
+}
+
+#sidebar {
+width: 30%;
+background-color: #f8f9fa;
+border-right: 1px solid #ddd;
+display: flex;
+flex-direction: column;
+}
+
+#sidebar-header {
+padding: 20px;
+background-color: #075e54;
+color: #fff;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+#sidebar-header img {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+}
+
+#sidebar-header .fa {
+cursor: pointer;
+}
+
+#chat-list {
+flex: 1;
+overflow-y: auto;
+}
+
+.chat-item {
+padding: 15px;
+display: flex;
+align-items: center;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+.chat-item:hover {
+background-color: #f1f1f1;
+}
+
+.chat-item img {
+width: 50px;
+height: 50px;
+border-radius: 50%;
+margin-right: 15px;
+}
+
+.chat-item .chat-info {
+flex: 1;
+}
+
+.chat-item .chat-info h4 {
+margin: 0;
+font-size: 16px;
+color: #333;
+}
+
+.chat-item .chat-info p {
+margin: 5px 0 0;
+font-size: 14px;
+color: #777;
+}
+
+#main-chat {
+width: 70%;
+display: flex;
+flex-direction: column;
+}
+
+#chat-header {
+padding: 20px;
+background-color: #075e54;
+color: #fff;
+display: flex;
+align-items: center;
+}
+
+#chat-header img {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+margin-right: 15px;
+}
+
+#chat-messages {
+flex: 1;
+padding: 20px;
+overflow-y: auto;
+background-color: #e5ddd5;
+}
+
+.message {
+display: flex;
+align-items: center;
+margin-bottom: 10px;
+}
+
+.message img {
+width: 30px;
+height: 30px;
+border-radius: 50%;
+margin-right: 10px;
+}
+
+.message-content {
+padding: 10px 15px;
+border-radius: 20px;
+max-width: 80%;
+word-wrap: break-word;
+}
+
+.user-message {
+background-color: #dcf8c6;
+align-self: flex-end;
+flex-direction: row-reverse;
+}
+
+.bot-message {
+background-color: #fff;
+align-self: flex-start;
+}
+
+#input-container {
+display: flex;
+padding: 10px;
+border-top: 1px solid #ddd;
+background-color: #f8f9fa;
+}
+
+#user-input {
+flex: 1;
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 20px;
+margin-right: 10px;
+}
+
+#send-button, #upload-button, #select-img {
+padding: 10px 15px;
+border: none;
+border-radius: 20px;
+background-color: #075e54;
+color: #fff;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+#send-button:hover, #upload-button:hover {
+background-color: #064e48;
+}
+
+#spinner {
+display: none;
+width: 40px;
+height: 40px;
+border: 4px solid #075e54;
+border-top: 4px solid #e5ddd5;
+border-radius: 50%;
+animation: spin 1s linear infinite;
+margin: 10px auto;
+}
+
+@keyframes spin {
+0% {
+transform: rotate(0deg);
+}
+100% {
+transform: rotate(360deg);
+}
+}
+</style>
+</head>
+<body>
+<div id="chat-container">
+<div id="sidebar">
+<div id="sidebar-header">
+<img src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=1024x1024&w=is&k=20&c=-mUWsTSENkugJ3qs5covpaj-bhYpxXY-v9RDpzsw504=" alt="User">
+<i class="fas fa-ellipsis-v"></i>
+</div>
+<div id="chat-list">
+<div class="chat-item">
+<img src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=1024x1024&w=is&k=20&c=-mUWsTSENkugJ3qs5covpaj-bhYpxXY-v9RDpzsw504=" alt="User">
+<div class="chat-info">
+<h4>DigiDhan - Digital Lending Assistant</h4>
+</div>
+</div>
+<div class="message-content"><p>This is a sample application powered by Amazon Bedrock Agents. The application automates intelligent document processing, credit underwriting workflow</p> </div>
+<div class="message-content"><p>The documents used in the demo are all sample/dummy documents</p></div>
+<div class="message-content"><p>Do not upload any sensitive/PII/confidential data</p></div>
+</div>
+</div>
+<div id="main-chat">
+<div id="chat-header">
+<img src="https://media.istockphoto.com/id/2078304100/vector/chatbots.jpg?s=1024x1024&w=is&k=20&c=LTKZpcqnvEBgvFCzdgMXmm1SzzFKQs8i21aREa_AEg8=" width=30px height=30px alt="Bot">
+<h4>DigiDhan - Digital Lending Assistant</h4>
+</div>
+<div id="chat-messages">
+<div class="message user-message">
+<img src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=1024x1024&w=is&k=20&c=-mUWsTSENkugJ3qs5covpaj-bhYpxXY-v9RDpzsw504=" alt="User">
+<div class="message-content">Hello!</div>
+</div>
+<div class="message bot-message">
+<img src="https://media.istockphoto.com/id/2078304100/vector/chatbots.jpg?s=1024x1024&w=is&k=20&c=LTKZpcqnvEBgvFCzdgMXmm1SzzFKQs8i21aREa_AEg8=" alt="Bot">
+<div class="message-content">Hi there! How can I assist you today?</div>
+</div>
+</div>
+<div id="input-container">
+<input type="text" id="user-input" placeholder="Type your message...">
+<button id="send-button">Send</button>
+<div id="select-img"><input type="file" id="imageFile" accept="image/*"></div>
+<button id="upload-button"><i class="fas fa-paperclip"></i></button>
+</div>
+<div id="spinner"></div>
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="script.js"></script>
+<script>
+$(document).ready(function() {
+// Initialize a variable to store the sessionId
+var sessionId;
+$('#send-button').click(function() {
+sendMessage();
+});
+
+$('#user-input').keypress(function(event) {
+if (event.which === 13) {
+sendMessage();
+}
+});
+
+$('#upload-button').click(function() {
+uploadImage();
+});
+
+function sendMessage() {
+var userInput = $('#user-input').val();
+if (userInput.trim() === '') return;
+
+$('#chat-messages').append('<br><div class="user-message"> <img src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=1024x1024&w=is&k=20&c=-mUWsTSENkugJ3qs5covpaj-bhYpxXY-v9RDpzsw504=" width=30px height=30px alt="User">&nbsp;&nbsp;&nbsp;&nbsp;' + userInput + '</div>');
+$('#user-input').val('');
+
+sendRequest(userInput);
+}
+
+function sendRequest(userInput) {
+// Show spinner when sending request
+$('#spinner').show();
+
+$.ajax({
+type: 'POST',
+url: 'http://insureAssistApi/',
+data: JSON.stringify({ sessionId: sessionId, inputText: userInput }),
+contentType: 'application/json',
+success: function (response) {
+console.log("This is the response" + response)
+var botAnswer = response.agentAnswer;
+
+// Update the sessionId with the one received in the response
+sessionId = response.sessionId;
+
+$('#chat-messages').append('<br><div class="bot-message"> <img src="https://media.istockphoto.com/id/2078304100/vector/chatbots.jpg?s=1024x1024&w=is&k=20&c=LTKZpcqnvEBgvFCzdgMXmm1SzzFKQs8i21aREa_AEg8=" width=30px height=30px alt="Bot">&nbsp;&nbsp;&nbsp;&nbsp;' + botAnswer + '</div>');
+
+// Hide spinner when response is received
+$('#spinner').hide();
+},
+error: function (xhr, status, error) {
+console.error('Error:', error);
+// Hide spinner if an error occurs
+$('#spinner').hide();
+}
+});
+}
+
+function uploadImage() {
+var fileInput = document.getElementById('imageFile');
+var file = fileInput.files[0];
+
+if (!file) {
+alert('Please select an image file.');
+return;
+}
+
+var formData = new FormData();
+formData.append('image', file);
+$('#spinner').show();
+
+$.ajax({
+type: 'POST',
+url: 'http://uiAlbforinsureassist/upload',
+data: formData,
+processData: false,
+contentType: false,
+success: function(response) {
+console.log('Image uploaded successfully:', response);
+// Handle response if needed
+$.ajax({
+type: 'POST',
+url: 'http://insureAssistApi/',
+data: JSON.stringify({ sessionId: sessionId, inputText: response.s3_url }),
+contentType: 'application/json',
+success: function (response) {
+console.log("This is the response" + response)
+var botAnswer = response.agentAnswer;
+
+// Update the sessionId with the one received in the response
+sessionId = response.sessionId;
+
+$('#chat-messages').append('<div class="bot-message">' + botAnswer + '</div>');
+
+// Hide spinner when response is received
+$('#spinner').hide();
+},
+error: function (xhr, status, error) {
+console.error('Error:', error);
+// Hide spinner if an error occurs
+$('#spinner').hide();
+}
+});
+
+},
+error: function(xhr, status, error) {
+console.error('Error uploading image:', error);
+alert('Error uploading image. Please try again later.');
+// Hide spinner if an error occurs
+$('#spinner').hide();
+}
+});
+}
+});
+</script>
+</body>
+</html>

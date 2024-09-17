@@ -1,0 +1,412 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Loan application creating Assistant",
+      "version": "1.0.0",
+      "description": "APIs for managing loan approval by creating new loan application and checking existing user before creating a loan application"
+    },
+    "paths": {
+      "POST__CreateLoan__DetermineUserDetails": {
+        "post": {
+            "summary": "Determine Whether an user is a new customer or an existing customer",
+            "description": "Determine whether an user is a new customer or an existing customer. This API should be called for every new loan application. ",
+            "operationId": "DetermineUserDetails",
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                      "schema": {
+                    "type": "object",
+                    "properties": {
+                        "customerName": {
+                          "type": "string",
+                          "description": "Customer's name for the loan application",
+                          "minLength": 3
+                        },
+                        "pan": {
+                          "type": "string",
+                          "description": "Customer's PAN number for the loan application",
+                          "minLength": 10
+                        },
+                        "emailAddress": {
+                          "type": "string",
+                          "description": "Customer's email Address for the loan application",
+                          "minLength": 5
+                        },
+                        "loanAmt": {
+                          "type": "string",
+                          "description": "Customer's preferred loan for the loan application",
+                          "minLength": 5
+                        }
+                    },
+                      "required": [
+                        "customerName",
+                        "pan",
+                        "emailAddress",
+                        "loanAmt"
+                    ]
+                }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "Success",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                              "type": "object",
+                              "properties": {
+                                  "isExistingUser": {
+                                    "type": "boolean",
+                                    "description": "Indicator of whether the user is an existing user or not"
+                                },
+                                  "customerName": {
+                            "type": "string",
+                            "description": "Customer's name for the loan application",
+                            "minLength": 3
+                          },
+                                  "pan": {
+                                    "type": "string",
+                                    "description": "Customer's PAN number for the loan application",
+                                    "minLength": 10
+                                  },
+                                  "emailAddress": {
+                                    "type": "string",
+                                    "description": "Customer's email Address for the loan application",
+                                    "minLength": 5
+                                  },
+                                  "loanAmt": {
+                          "type": "string",
+                          "description": "Customer's preferred loan for the loan application",
+                          "minLength": 5
+                        }
+
+                                        }
+                                      }
+                        }
+                    }
+                }
+            }
+        }
+    },
+      "GET__CreateLoan__GreetUser": {
+        "get": {
+            "summary": "Custom message to display for the user after determining whether they are new or existing customer",
+            "description": "Custom message to display for the user after determining whether they are new or existing customer. This needs to be invoked after checking user and before verifying PAN OR AADHAR CARD",
+            "operationId": "GreetUser",
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                      "schema": {
+                    "type": "object",
+                    "properties": {
+                        "isExistingUser": {
+                          "type": "boolean",
+                          "description": "Indicator of whether the user is an existing user or not"
+                      }
+                      },
+                      "required": [
+                        "isExistingUser"
+                    ]
+                }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "Success",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                              "type": "object",
+                              "properties": {
+                                 "isExistingUser": {
+                                    "type": "boolean",
+                                    "description": "Indicator of whether the user is an existing user or not"
+                                },
+                                  "customerMessage": {
+                                    "type": "string",
+                                    "description": "Customized message for the user to display",
+                                    "minLength": 3
+                                  }
+
+
+
+                                        }
+                                      }
+                        }
+                    }
+                }
+            }
+        }
+    },
+      "POST__CreateLoan__VerifyUserPanCard": {
+        "post": {
+            "summary": "Verify the PAN card identity of the user by getting the PAN card document from them",
+            "description": "verify the PAN proof of the user from the uploaded pan document This API should be called for every new loan application before creating loan. This is required for both new and existing customers. Ask the user to upload PAN card proof document",
+            "operationId": "VerifyUserPanCard",
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                      "schema": {
+                    "type": "object",
+                    "properties": {
+                        "isExistingUser": {
+                          "type": "boolean",
+                          "description": "Indicator of whether the user is an existing user or not"
+                      },
+                        "image_path": {
+                          "type": "string",
+                          "description": "Image name for pancard document proof",
+                          "minLength": 5
+                        }
+                      },
+                      "required": [
+                        "isExistingUser",
+                        "image_path"
+                    ]
+                }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "Success",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                              "type": "object",
+                              "properties": {
+                                 "isExistingUser": {
+                                    "type": "boolean",
+                                    "description": "Indicator of whether the user is an existing user or not"
+                                },
+                                "isPan": {
+                                    "type": "boolean",
+                                    "description": "Indicator of whether the document is PAN proof or not"
+                                },
+                                  "customerName": {
+                                    "type": "string",
+                                    "description": "Customer’s Name for creating the loan application",
+                                    "minLength": 3
+                                  },
+                                   "pan": {
+                                    "type": "string",
+                                    "description": "Customer's PAN number for the loan application",
+                                    "minLength": 10
+                                  },
+                                  "dob": {
+                                    "type": "string",
+                                    "description": "Customer's Date of birth",
+                                    "minLength": 8
+                                  }
+
+
+                                        }
+                                      }
+                        }
+                    }
+                }
+            }
+        }
+    },
+      "POST__CreateLoan__VerifyUserAadharCard": {
+        "post": {
+            "summary": "Verify the Aadhar card ",
+            "description": "Verify the aadhar card proof from the uploaded aadhar document This API should be called for every new loan application before loan application is created. This is required only for new customers. Ask the user to upload Aadhar card proof document",
+            "operationId": "VerifyUserAadharCard",
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                      "schema": {
+                    "type": "object",
+                    "properties": {
+                      "isExistingUser": {
+                          "type": "boolean",
+                          "description": "Indicator of whether the user is an existing user or not"
+                      },
+                      "image_path": {
+                          "type": "string",
+                          "description": "Aadhar Image name for proof",
+                          "minLength": 5
+                        },
+                      "isPan": {
+                                    "type": "boolean",
+                                    "description": "Indicator of whether the document is PAN proof or not"
+                                },
+                      "customerName": {
+                                    "type": "string",
+                                    "description": "Customer’s Name for creating the loan application",
+                                    "minLength": 3
+                                  },
+                      "pan": {
+                                    "type": "string",
+                                    "description": "Customer's PAN number for the loan application",
+                                    "minLength": 10
+                                  },
+                      "dob": {
+                                    "type": "string",
+                                    "description": "Customer's Date of birth",
+                                    "minLength": 8
+                                  }
+                      },
+                      "required": [
+                        "isExistingUser",
+                        "image_path",
+                        "isPan",
+                        "customerName",
+                        "pan",
+                        "dob"
+                    ]
+                }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "Success",
+                    "content": {
+                        "application/json": {
+                          "schema": {
+                            "type": "object",
+                            "properties": {
+                              "isExistingUser": {
+                              "type": "boolean",
+                              "description": "Indicator of whether the user is an existing user or not"},
+                              "isAadhar": {
+                                "type": "boolean",
+                                "description": "Indicator of whether the document is aadhar proof or not"
+                              },
+                              "address": {
+                                "type": "string",
+                                "description": "Customer’s address for creating the loan application",
+                                "minLength": 3
+                              },
+                              "sex": {
+                                "type": "string",
+                                "description": "Customer's gender for the loan application",
+                                "minLength": 1
+                              },
+                              "dob": {
+                                "type": "string",
+                                "description": "Customer's Date of birth",
+                                "minLength": 8
+                              },
+                              "isPan": {
+                                "type": "boolean",
+                                "description": "Indicator of whether the document is PAN proof or not"
+                              },
+                              "customerName": {
+                                "type": "string",
+                                "description": "Customer’s Name for creating the loan application",
+                                "minLength": 3
+                              },
+                              "pan": {
+                              "type": "string",
+                              "description": "Customer's PAN number for the loan application",
+                              "minLength": 10
+                            },
+                              "aadhar": {
+                              "type": "string",
+                              "description": "Customer's Aadhar number for the loan application",
+                              "minLength": 12
+                            },
+                              "riskScore": {
+                              "type": "string",
+                              "description": "Customer's risk Score for the loan application",
+                              "minLength": 2
+                            },
+                              "creditScore": {
+                              "type": "string",
+                              "description": "Customer's Cibil or credit score for the loan application",
+                              "minLength": 3
+                            }
+                          }
+                        }
+                            }
+                                      }
+                        }
+                    }
+                }
+            },
+      "POST__CreateLoan__SubmitLoanApplication": {
+        "post": {
+          "summary": "Create New Loan application",
+          "description": "Create new loan application for the customer. This API must be called for each new loan application request after calculating riskscore and creditScore",
+          "operationId": "SubmitLoanApplication",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "customerName": {
+                          "type": "string",
+                          "description": "Customer’s Name for creating the loan application",
+                          "minLength": 3
+                        },
+                        "loanAmt": {
+                          "type": "string",
+                          "description": "Preferred loan amount for the loan application",
+                          "minLength": 5
+                        },
+                        "pan": {
+                          "type": "string",
+                          "description": "Customer's PAN number for the loan application",
+                          "minLength": 10
+                        },
+                        "riskScore": {
+                                    "type": "string",
+                                    "description": "Risk Score of the customer",
+                                    "minLength": 2
+                                  },
+                        "creditScore": {
+                                    "type": "string",
+                                    "description": "Risk Score of the customer",
+                                    "minLength": 3
+                                  }
+                    },
+                      "required": [
+                        "customerName",
+                        "address",
+                        "loanAmt",
+                        "pan",
+                        "riskScore",
+                        "creditScore"
+                    ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "loanId": {
+                        "type": "string",
+                        "description": "Identifier for the created loan application"
+                      },
+                      "status": {
+                        "type": "string",
+                        "description": "Status of the loan application creation process"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+      }
+    }
+}
