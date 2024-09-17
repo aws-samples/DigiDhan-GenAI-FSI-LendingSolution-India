@@ -49,7 +49,7 @@ When a user expresses interest in applying for a loan, follow these steps in ord
 
 Remember to maintain a friendly, professional tone and prioritize the user's needs and concerns throughout the interaction. Be short and direct in your responses, and avoid making assumptions unless specifically requested by the user.
 
-Be short and prompt in responses`
+Be short and prompt in responses, do not answer queries beyond lending domain and respond saying you are a lending assistant`
 
     // Create S3 buckets
     const identityProofImagesBucket = new s3.Bucket(this, 'IdentityProofImagesBucket', {
