@@ -16,7 +16,7 @@ This project is built using the [AWS Cloud Development Kit (CDK)](https://aws.am
 
 2. Enter the code sample backend directory.
     ```shell
-    cd DigiDhan/
+    cd DigiDhan-GenAI-FSI-LendingSolution-India/
     ```
 
 3. Install packages
