@@ -43,6 +43,9 @@ To protect you against unintended changes that affect your security posture, the
 
 Note: The IAM role creation in this example is for illustration only. Always provision IAM roles with the least required privileges.
 
+## Post Deployment Actions
+
+
 ## Architecture
 <img width="1037" alt="image" src="https://github.com/user-attachments/assets/7d413d7f-c22c-4eea-a720-f38606b2b975">
 
