@@ -3,7 +3,7 @@
 
 ### Deploy the solution
 This project is built using the [AWS Cloud Development Kit (CDK)](https://aws.amazon.com/cdk/). 
-- For refernce here are the versions of node and aws cdk that have been used.
+- For reference here are the versions of node and aws cdk that have been used.
 - Node.js: v20.16.0
 - [AWS CDK](https://github.com/aws/aws-cdk/releases/tag/v2.143.0): 2.143.0
 - Command to install a specific version of aws-cdk is  
