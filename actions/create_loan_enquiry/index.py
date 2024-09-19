@@ -16,6 +16,7 @@ import base64
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+# edit this or add logic where you can fetch existing user PAN from DB
 existing_customer = ['KZ9ENJ2GIP', 'KZ9ENJ2G1P']
 
 
@@ -25,7 +26,7 @@ def send_approval_emails(pan, customer_name, loan_id, creditScore, loan_amt):
     subject = f"Loan Request Created - {loan_id}"
     ses_client = boto3.client('ses')
     CHARSET = "UTF-8"
-    recepients = ["reenacs@amazon.com", "shshaill@amazon.com"]
+    recepients = ["name@xyz.com"]
     response = ses_client.send_email(
         Destination={
             'ToAddresses': recepients,
@@ -42,7 +43,7 @@ def send_approval_emails(pan, customer_name, loan_id, creditScore, loan_amt):
                 'Data': subject,
             },
         },
-        Source=f"Loan Approval Alert<reenacs@amazon.com>"
+        Source=f"Loan Approval Alert<name@xyx.com>"
     )
     return message
 
