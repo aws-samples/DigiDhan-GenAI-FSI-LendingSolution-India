@@ -22,10 +22,10 @@ This project is built using the [AWS Cloud Development Kit (CDK)](https://aws.am
 3. Install packages
    ```shell
    npm install
-   npm install -g aws-cdk@2.143.0
+   npm install -g aws-cdk
    ```
 
-4. Boostrap AWS CDK resources on the AWS account. 
+4. Boostrap AWS CDK resources on the AWS account. If deployed in any region other tahn us-east the stack may fail due to lambda layers dependecy, you can either comment the layer and deploy in other region or just deploy in us-east-1
     ```shell
     cdk bootstrap aws://ACCOUNT_ID/REGION
     ```
@@ -42,6 +42,10 @@ The command above will deploy one stack in your account.
 To protect you against unintended changes that affect your security posture, the AWS CDK Toolkit prompts you to approve security-related changes before deploying them. You will need to answer yes to get all the stack deployed.
 
 Note: The IAM role creation in this example is for illustration only. Always provision IAM roles with the least required privileges.
+
+## Architecture
+<img width="1037" alt="image" src="https://github.com/user-attachments/assets/7d413d7f-c22c-4eea-a720-f38606b2b975">
+
 
 ## Clean up
 
