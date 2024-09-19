@@ -25,7 +25,7 @@ This project is built using the [AWS Cloud Development Kit (CDK)](https://aws.am
    npm install -g aws-cdk
    ```
 
-4. Boostrap AWS CDK resources on the AWS account. If deployed in any region other than us-east the stack may fail due to lambda layers dependecy, you can either comment the layer and deploy in other region or just deploy in us-east-1
+4. Boostrap AWS CDK resources on the AWS account. If deployed in any region other than us-east-1 the stack may fail due to lambda layers dependecy, you can either comment the layer and deploy in other region or just deploy in us-east-1
     ```shell
     cdk bootstrap aws://ACCOUNT_ID/REGION
     ```
