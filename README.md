@@ -34,7 +34,7 @@ This project is built using the [AWS Cloud Development Kit (CDK)](https://aws.am
 
 6. Deploy the sample in your account. 
     ```shell
-    $ cdk deploy --all
+    cdk deploy --all
     ```
 The command above will deploy one stack in your account.
 
