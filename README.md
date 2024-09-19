@@ -41,10 +41,13 @@ The command above will deploy one stack in your account.
 
 To protect you against unintended changes that affect your security posture, the AWS CDK Toolkit prompts you to approve security-related changes before deploying them. You will need to answer yes to get all the stack deployed.
 
-Note: The IAM role creation in this example is for illustration only. Always provision IAM roles with the least required privileges.
+Note: The IAM role creation in this example is for illustration only. Always provision IAM roles with the least required privileges. 
+      The Stack deployment roughly takes 10-15 minutes.
+      Once the stack is successfully deployed you can find **InsureAssistApiAlbDnsName** in the output section of the stack, this is the application endpoint.
 
 ## Post Deployment Actions
-
+1. Go To Bedrock console in the deployed region and edit the Agent. Modify additional settings and enable **user Input** which decides whether the agent can prompt additional information from the user when it does not have enough information to respond to an utterance. 
+<img width="1037" alt="image" src="https://github.com/user-attachments/assets/bf50b7fe-7ea7-40cf-b045-52db0fc619d6">
 
 ## Architecture
 <img width="1037" alt="image" src="https://github.com/user-attachments/assets/7d413d7f-c22c-4eea-a720-f38606b2b975">
