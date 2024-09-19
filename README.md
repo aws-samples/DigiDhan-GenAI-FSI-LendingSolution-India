@@ -11,7 +11,7 @@ This project is built using the [AWS Cloud Development Kit (CDK)](https://aws.am
 
 1. Clone this repository.
     ```shell
-    git clone <this>
+    git clone https://github.com/aws-samples/DigiDhan-GenAI-FSI-LendingSolution-India.git
     ```
 
 2. Enter the code sample backend directory.
@@ -22,15 +22,16 @@ This project is built using the [AWS Cloud Development Kit (CDK)](https://aws.am
 3. Install packages
    ```shell
    npm install
+   npm install -g aws-cdk@2.143.0
    ```
 
-4. Boostrap AWS CDK resources on the AWS account.
+4. Boostrap AWS CDK resources on the AWS account. 
     ```shell
     cdk bootstrap aws://ACCOUNT_ID/REGION
     ```
 
 5. Enable Access to Amazon Bedrock Models
-> You must explicitly enable access to models before they can be used with the Amazon Bedrock service. Please follow these steps in the [Amazon Bedrock User Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) to enable access to the models (```Anthropic::Claude``` and ```Cohere::Embed English```):.
+> You must explicitly enable access to models before they can be used with the Amazon Bedrock service. Please follow these steps in the [Amazon Bedrock User Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) to enable access to the models (```Anthropic::Claude (Sonnet)``` and ```Cohere::Embed English```):.
 
 6. Deploy the sample in your account. 
     ```shell
