@@ -65,7 +65,8 @@ Follow these steps to deploy the solution:
 
 1. Go to the Bedrock console in the deployed region and edit the Agent. Modify additional settings and enable **user Input**, which decides whether the agent can prompt additional information from the user when it does not have enough information to respond to an utterance.
 
-   <img width="1037" alt="image" src="https://github.com/user-attachments/assets/bf50b7fe-7ea7-40cf-b045-52db0fc619d6">
+   <img width="468" alt="Arch" src="https://github.com/user-attachments/assets/b1879242-fc29-43f9-8a29-25bcd84dcbe0">
+
 
 ## Architecture
 
