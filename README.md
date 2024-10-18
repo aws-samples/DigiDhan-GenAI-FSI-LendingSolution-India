@@ -1,4 +1,4 @@
-# Digital Lending Assistant powered by Amazon Bedrock Agent: DigiDhan
+# Digital Lending Assistant powered by Amazon Bedrock Agent: DigitalDhan
 
 ## Table of Contents
 - [Deploy the Solution](#deploy-the-solution)
