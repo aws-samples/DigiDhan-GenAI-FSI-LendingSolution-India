@@ -279,10 +279,6 @@ Be short and prompt in responses, do not answer queries beyond lending domain an
       value: InsureAssistUIalb.loadBalancerDnsName
     });
 
-    // Output the bucket name
-    new cdk.CfnOutput(this, 'ImageBucketName', {
-      value: damageImagesBucket.bucketName,
-    });
 
   }
 }
