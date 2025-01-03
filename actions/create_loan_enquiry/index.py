@@ -27,6 +27,7 @@ def send_approval_emails(pan, customer_name, loan_id, creditScore, loan_amt):
     ses_client = boto3.client('ses')
     CHARSET = "UTF-8"
     recepients = ["name@xyz.com"]
+    sender_add = "name@xyz.com"
     response = ses_client.send_email(
         Destination={
             'ToAddresses': recepients,
@@ -43,7 +44,7 @@ def send_approval_emails(pan, customer_name, loan_id, creditScore, loan_amt):
                 'Data': subject,
             },
         },
-        Source=f"Loan Approval Alert<name@xyx.com>"
+        Source=f"Loan Approval Alert<{sender_add}>"
     )
     return message
 
