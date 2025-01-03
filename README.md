@@ -43,15 +43,20 @@ Follow these steps to deploy the solution:
    npm install -g aws-cdk
    ```
 
-4. Bootstrap AWS CDK resources on the AWS account. If deployed in any region other than `us-east-1`, the stack may fail due to the lambda layers dependency. You can either comment out the layer and deploy in another region or deploy in `us-east-1`:
+
+4. Add your verified ses email address for testing purpose:
+   Edit line number 29 and 30 in actions/create_loan_enquiry/index.py file and modify it to your verified email address. For steps on email verification follow : https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-email-addresses-procedure
+
+
+5. Bootstrap AWS CDK resources on the AWS account. If deployed in any region other than `us-east-1`, the stack may fail due to the lambda layers dependency. You can either comment out the layer and deploy in another region or deploy in `us-east-1`:
 
    ```shell
    cdk bootstrap aws://ACCOUNT_ID/REGION
    ```
 
-5. Enable access to Amazon Bedrock Models. You must explicitly enable access to models before they can be used with the Amazon Bedrock service. Follow these steps in the [Amazon Bedrock User Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) to enable access to the models (`Anthropic::Claude (Sonnet)` and `Cohere::Embed English`).
+6. Enable access to Amazon Bedrock Models. You must explicitly enable access to models before they can be used with the Amazon Bedrock service. Follow these steps in the [Amazon Bedrock User Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) to enable access to the models (`Anthropic::Claude (Sonnet)` and `Cohere::Embed English`).
 
-6. Deploy the sample in your account:
+7. Deploy the sample in your account:
 
    ```shell
    cdk deploy --all
