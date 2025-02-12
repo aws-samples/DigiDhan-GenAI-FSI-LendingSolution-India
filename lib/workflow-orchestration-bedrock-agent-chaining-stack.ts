@@ -114,15 +114,16 @@ Be short and prompt in responses, do not answer queries beyond lending domain an
       shouldPrepareAgent: true
     });
 
+
+
     // Loan Creation Action Group
-    const LoanCreationActionGroup = new bedrock.AgentActionGroup(this, 'LoanCreationActionGroup', {
-      actionGroupName: 'LoanCreationActionGroup',
+
+    const LoanCreationActionGroup = new bedrock.AgentActionGroup({
+      name: 'LoanCreationActionGroup',
       description: 'Action group for loan creation',
-      actionGroupExecutor: {
-        lambda: loanEnquiryLambdaFunction,
-      },
-      actionGroupState: 'ENABLED',
-      apiSchema: bedrock.ApiSchema.fromAsset(
+      executor: bedrock.ActionGroupExecutor.fromlambdaFunction(loanEnquiryLambdaFunction),
+      enabled: true,
+      apiSchema: bedrock.ApiSchema.fromLocalAsset(
         path.join(__dirname, '..', './actions/create_loan_enquiry/createloanenquiry_spec.json')
       ),
     });
@@ -141,7 +142,7 @@ Be short and prompt in responses, do not answer queries beyond lending domain an
 
     const kb_instruction = 'Use this knowledge base to answer any loan related questions'
     // Bedrock Knowledge Base
-    const kb_loan = new bedrock.KnowledgeBase(this, 'BedrockKnowledgeBaseLoan', {
+    const kb_loan = new bedrock.VectorKnowledgeBase(this, 'BedrockKnowledgeBaseLoan', {
       embeddingsModel: bedrock.BedrockFoundationModel.COHERE_EMBED_ENGLISH_V3,
       instruction: kb_instruction
     });
@@ -157,14 +158,17 @@ Be short and prompt in responses, do not answer queries beyond lending domain an
       bucket: loanPolicyDocsBucket,
       knowledgeBase: kb_loan,
       dataSourceName: 'loan-knowledge-base',
-      chunkingStrategy: bedrock.ChunkingStrategy.DEFAULT
+      chunkingStrategy: bedrock.ChunkingStrategy.fixedSize({
+        maxTokens: 500,
+        overlapPercentage: 20
+      })
     });
 
     LoanAutomationAndNotificationAgent.addKnowledgeBase(kb_loan);
     //Output
     new cdk.CfnOutput(this, 'LoanKnowledgeBaseIdOutput', { value: kb_loan.knowledgeBaseId });
 
-    //User interface constructs and code
+    // User interface constructs and code
 
     // Retrieve default VPC associated with Cloud9
     const vpc = ec2.Vpc.fromLookup(this, 'DefaultVpc', {
