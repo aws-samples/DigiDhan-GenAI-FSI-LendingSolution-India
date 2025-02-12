@@ -11,16 +11,7 @@
 
 ## Deploy the Solution
 
-This project is built using the [AWS Cloud Development Kit (CDK)](https://aws.amazon.com/cdk/). The following versions of Node.js and AWS CDK have been used:
-
-- Node.js: v20.16.0
-- [AWS CDK](https://github.com/aws/aws-cdk/releases/tag/v2.143.0): 2.143.0
-
-To install a specific version of AWS CDK, run the following command:
-
-```
-npm install -g aws-cdk@X.YY.Z
-```
+This project is built using the [AWS Cloud Development Kit (CDK)](https://aws.amazon.com/cdk/). 
 
 Follow these steps to deploy the solution:
 
@@ -34,6 +25,7 @@ Follow these steps to deploy the solution:
 
    ```shell
    cd DigiDhan-GenAI-FSI-LendingSolution-India/
+   If you are running this solution on an Amazon EC2 instance , please edit the file in bin/workflow-orchestration-bedrock-agent-chaining.ts with your Account number and region
    ```
 
 3. Install packages:
