@@ -22,8 +22,8 @@ Follow these steps to deploy the solution:
    ```
 
 2. If you are running this solution on an Amazon EC2 instance , please edit the file in bin/workflow-orchestration-bedrock-agent-chaining.ts with your Account number and region.
-   
-Enter the code sample backend directory:
+
+3. Enter the code sample backend directory:
 
    ```shell
    cd DigiDhan-GenAI-FSI-LendingSolution-India/
